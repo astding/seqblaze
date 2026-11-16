@@ -1,0 +1,142 @@
+# Release to PyPI. A pushed tag v<version> builds the source distribution and one Linux x86_64
+# abi3 wheel with the CUDA backend compiled in, checks both, and publishes them by trusted
+# publishing (OIDC; no token secret). The publish job waits for approval on the GitHub
+# environment "pypi"; the maintainer approves only after validating the exact artifacts of the
+# run. workflow_dispatch runs the build and check jobs only and never publishes.
+#
+# Owner setup: a PyPI trusted publisher (project seqblaze, owner astding, repository seqblaze,
+# workflow release.yml, environment pypi); the GitHub environment "pypi" with a required
+# reviewer; v* tags protected.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  MATURIN_VERSION: "1.15.0"
+
+jobs:
+  sdist:
+    name: source distribution
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: tag matches the workspace version
+        if: github.event_name == 'push'
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          ver="$(sed -n '/^\[workspace.package\]/,/^\[/s/^version = "\(.*\)"$/\1/p' Cargo.toml)"
+          echo "tag ${TAG}, Cargo.toml ${ver}"
+          test "${TAG}" = "v${ver}" || { echo "::error::tag ${TAG} does not match version ${ver}"; exit 1; }
+      - uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b  # v1.51.0
+        with:
+          maturin-version: ${{ env.MATURIN_VERSION }}
+          command: sdist
+          args: --out dist
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: sdist
+          path: dist/
+          if-no-files-found: error
+
+  wheel:
+    name: Linux x86_64 wheel (CPU and CUDA)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      # Runs inside the manylinux_2_28 container. nvcc 12.8.61 is the release the project builds
+      # with; the device code is integer-only, so no floating-point build flag can change results.
+      - uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b  # v1.51.0
+        with:
+          maturin-version: ${{ env.MATURIN_VERSION }}
+          target: x86_64
+          manylinux: "2_28"
+          docker-options: >-
+            -e SEQBLAZE_CUDA_ARCHS=release
+            -e SEQBLAZE_NVCC=/usr/local/cuda-12.8/bin/nvcc
+          before-script-linux: |
+            dnf install -y dnf-plugins-core
+            dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo
+            dnf install -y cuda-nvcc-12-8-12.8.61-1 cuda-crt-12-8-12.8.61-1 cuda-nvvm-12-8-12.8.61-1 cuda-cudart-devel-12-8-12.8.57-1
+          args: --release --features cuda --out dist
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: wheel-linux-x86_64
+          path: dist/
+          if-no-files-found: error
+
+  check:
+    name: check the distributions
+    needs: [sdist, wheel]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          path: dist/
+          merge-multiple: true
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: twine check --strict
+        run: |
+          python -m pip install twine==7.0.0
+          twine check --strict dist/*
+      - name: one sdist, one abi3 manylinux wheel, licence files in both
+        run: |
+          python - <<'PY'
+          import glob, sys, tarfile, zipfile
+          sdists, wheels = glob.glob("dist/*.tar.gz"), glob.glob("dist/*.whl")
+          if len(sdists) != 1 or len(wheels) != 1:
+              sys.exit(f"expected one sdist and one wheel, got {sdists} {wheels}")
+          if "-cp310-abi3-manylinux_2_28_x86_64" not in wheels[0]:
+              sys.exit(f"unexpected wheel tag: {wheels[0]}")
+          files = ("LICENSE-MIT", "LICENSE-APACHE", "NOTICE", "THIRD-PARTY-NOTICES")
+          names = zipfile.ZipFile(wheels[0]).namelist()
+          missing = [f for f in files if not any(n.endswith(".dist-info/licenses/" + f) for n in names)]
+          members = tarfile.open(sdists[0]).getnames()
+          missing += [f + " (sdist)" for f in files if not any(m.endswith("/" + f) for m in members)]
+          if missing:
+              sys.exit(f"missing licence files: {missing}")
+          print("ok:", sdists[0], wheels[0])
+          PY
+      - name: SHA256SUMS (kept outside dist/ so the upload holds distributions only)
+        run: |
+          mkdir -p meta
+          (cd dist && sha256sum -- *) | tee meta/SHA256SUMS
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: release-meta
+          path: meta/SHA256SUMS
+          if-no-files-found: error
+
+  publish:
+    name: publish to PyPI (trusted publishing)
+    needs: check
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/project/seqblaze/
+    permissions:
+      id-token: write  # granted to this job only
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          name: sdist
+          path: dist/
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          name: wheel-linux-x86_64
+          path: dist/
+      - name: publish
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # v1.14.2

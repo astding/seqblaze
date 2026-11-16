@@ -1,0 +1,18 @@
+[workspace]
+resolver = "2"
+members = ["crates/seqblaze-align", "crates/seqblaze-core", "crates/seqblaze-cuda", "crates/seqblaze-edit", "crates/seqblaze-io", "crates/seqblaze-py", "crates/seqblaze-thermo"]
+# seqblaze-cuda's CUDA content sits behind its feature `cuda` (off by default):
+# builds need neither CUDA nor nvcc.
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/astding/seqblaze"
+rust-version = "1.85"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+panic = "unwind"

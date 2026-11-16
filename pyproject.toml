@@ -1,0 +1,37 @@
+[build-system]
+requires = ["maturin>=1.15,<2"]
+build-backend = "maturin"
+
+[project]
+name = "seqblaze"
+description = "Fast, bit-exact batch computation on DNA sequences: edit distance, alignment, melting temperature and duplex thermodynamics on CPU and CUDA"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT OR Apache-2.0"
+license-files = ["LICENSE-MIT", "LICENSE-APACHE", "NOTICE", "THIRD-PARTY-NOTICES"]
+dependencies = ["numpy>=1.26"]
+dynamic = ["version"]
+keywords = ["bioinformatics", "DNA", "thermodynamics", "melting temperature", "primer design", "edit distance", "Levenshtein", "sequence alignment", "CUDA", "GPU"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: GPU :: NVIDIA CUDA :: 12",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.urls]
+Repository = "https://github.com/astding/seqblaze"
+Issues = "https://github.com/astding/seqblaze/issues"
+
+[project.optional-dependencies]
+primer3 = ["primer3-py==2.3.1"]
+
+[tool.maturin]
+manifest-path = "crates/seqblaze-py/Cargo.toml"
+python-source = "python"
+module-name = "seqblaze._core"
+features = ["pyo3/extension-module"]

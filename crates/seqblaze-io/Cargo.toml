@@ -1,0 +1,19 @@
+[package]
+name = "seqblaze-io"
+description = "FASTA/FASTQ readers for seqblaze (D92): gzip/BGZF members, line parser, Arrow-layout batches"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+# D92 dependencies only: flate2 with its pure-Rust backend (miniz_oxide); no
+# bzip2, xz, zstd or C zlib feature (docs/wiki/io/fasta-readers.md §16, A12).
+# flate2's default `runtime_detection` feature is left off: it names zlib-rs as a
+# weak dependency, which puts zlib-rs into Cargo.lock (A12 forbids it there).
+# crc32fast (a flate2 dependency) keeps its default `std` feature, i.e. runtime
+# CPU detection for the gzip CRC32.
+[dependencies]
+seqblaze-core = { path = "../seqblaze-core" }
+flate2 = { version = "1.1", default-features = false, features = ["rust_backend"] }
+crc32fast = "1.5"

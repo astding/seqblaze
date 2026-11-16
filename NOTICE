@@ -1,0 +1,426 @@
+seqblaze third-party attributions
+
+This file lists third-party attributions only. seqblaze's own licence terms
+are in LICENSE-MIT and LICENSE-APACHE.
+
+------------------------------------------------------------------------------
+
+Biopython
+
+seqblaze's tm compat="biopython" reproduces the behaviour of Biopython 1.88
+Bio.SeqUtils.MeltingTemp.Tm_NN ("compatible with Biopython"; no endorsement
+by the Biopython project is implied).
+
+Consulted file:
+  Bio/SeqUtils/MeltingTemp.py at git tag biopython-188
+  https://raw.githubusercontent.com/biopython/biopython/biopython-188/Bio/SeqUtils/MeltingTemp.py
+  sha256 4f3cbc585ffd68d54386d40f5edb113a7c2eae4aa4388c6b496bceecdec06500 (43,151 bytes)
+
+What was used: the operation order, the unit-conversion literals and the
+control flow of Tm_NN and salt_correction (method 5), for compat="biopython".
+No Biopython function body and no Biopython parameter table was copied.
+Tm_NN's keyword names (Na, K, Tris, Mg, dNTPs, dnac1, dnac2) and the texts of
+two of its error messages are quoted for compatibility. Every parameter value
+comes from the published papers through seqblaze's parameter ledger
+(SantaLucia 1998, doi:10.1073/pnas.95.4.1460; von Ahsen et al. 2001,
+doi:10.1093/clinchem/47.11.1956).
+
+Copyright 2004-2008 by Sebastian Bassi.
+Copyright 2013-2018 by Markus Piotrowski.
+Copyright (c) 1999-2025, The Biopython Contributors
+
+MeltingTemp.py is distributed under the licensee's choice of the "Biopython
+License Agreement" or the "BSD 3-Clause License". seqblaze uses it under the
+BSD 3-Clause License, reproduced here from LICENSE.rst at the same tag:
+
+Copyright (c) 1999-2025, The Biopython Contributors
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Tool citation:
+  Cock PJA, Antao T, Chang JT, Chapman BA, Cox CJ, Dalke A, Friedberg I,
+  Hamelryck T, Kauff F, Wilczynski B, de Hoon MJL. Biopython: freely
+  available Python tools for computational molecular biology and
+  bioinformatics. Bioinformatics 2009;25(11):1422-1423.
+  doi:10.1093/bioinformatics/btp163
+
+------------------------------------------------------------------------------
+
+Nearest Neighbor Database (NNDB), DNA parameters
+
+seqblaze's params="santalucia2004" preset for duplex (and tm on a Pairs
+input, which reads the same compiled pack) takes its 1x2, 2x1 and 2x2
+internal-loop free energies and enthalpies from the "DNA (RNAstructure)"
+section of the Nearest Neighbor Database (https://rna.urmc.rochester.edu/NNDB/,
+snapshot collected 2026-10-16). No endorsement by the NNDB authors is
+implied.
+
+What was used: the values of the int21 and int22 parameter tables, read from
+the snapshot and transcribed into seqblaze's own parameter-ledger layout
+(ledger units nndb2024-dna-int21 and nndb2024-dna-int22 under
+params/ledger/values/, each value with its locator), from which the compiled
+parameter pack is generated. No NNDB file is copied into or redistributed
+with seqblaze. No licence or terms statement was found on the NNDB pages
+consulted.
+
+Resource citations (the NNDB asks to be cited by both):
+  Mittal A, Turner DH, Mathews DH. NNDB: An expanded database of nearest
+  neighbor parameters for predicting stability of nucleic acid secondary
+  structures. J Mol Biol 2024;436(17):168549.
+  doi:10.1016/j.jmb.2024.168549
+
+  Turner DH, Mathews DH. NNDB: the nearest neighbor parameter database for
+  predicting stability of nucleic acid secondary structure.
+  Nucleic Acids Res 2010;38(Database issue):D280-D282.
+  doi:10.1093/nar/gkp892
+
+The NNDB credits its DNA parameter set to:
+  Reuter JS, Mathews DH. RNAstructure: software for RNA secondary structure
+  prediction and analysis. BMC Bioinformatics 2010;11:129.
+  doi:10.1186/1471-2105-11-129
+
+------------------------------------------------------------------------------
+
+Rust dependencies used for Result input hashing
+
+These Rust crates are linked into seqblaze. Sequence-table identities
+(merkle-blake3-v1) use blake3; index identities (merkle-sha256-v1) and the
+other SHA-256 identities use sha2. Each crate is listed with the licence under
+which seqblaze uses it, followed by the corresponding licence and copyright
+notices. sha2 0.10.9 and the crates listed after it up to version_check are
+each used under its MIT licence; arrayvec 0.7.8 and cpufeatures 0.3.1 are
+used under their MIT licences; blake3 1.8.7 and constant_time_eq 0.4.2 are
+used under the Apache License, Version 2.0, whose text is in LICENSE-APACHE,
+in the same directory.
+
+sha2 0.10.9
+https://crates.io/crates/sha2/0.10.9
+
+Copyright (c) 2006-2009 Graydon Hoare
+Copyright (c) 2009-2013 Mozilla Foundation
+Copyright (c) 2016 Artyom Pavlov
+
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+digest 0.10.7
+https://crates.io/crates/digest/0.10.7
+
+Copyright (c) 2017 Artyom Pavlov
+
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+block-buffer 0.10.4
+https://crates.io/crates/block-buffer/0.10.4
+
+Copyright (c) 2018-2019 The RustCrypto Project Developers
+
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+crypto-common 0.1.7
+https://crates.io/crates/crypto-common/0.1.7
+
+Copyright (c) 2021 RustCrypto Developers
+
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+cpufeatures 0.2.17
+https://crates.io/crates/cpufeatures/0.2.17
+
+Copyright (c) 2020-2025 The RustCrypto Project Developers
+
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+generic-array 0.14.7
+https://crates.io/crates/generic-array/0.14.7
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Bartłomiej Kamiński
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+typenum 1.20.1
+https://crates.io/crates/typenum/1.20.1
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Paho Lurie-Gregg
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+version_check 0.9.5
+https://crates.io/crates/version_check/0.9.5
+
+The MIT License (MIT)
+Copyright (c) 2017-2018 Sergio Benitez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+blake3 1.8.7
+https://crates.io/crates/blake3/1.8.7
+
+Offered under CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception; used
+under the Apache License, Version 2.0 (text in LICENSE-APACHE). Authors named
+by the crate: Jack O'Connor and Samuel Neves. The crate's licence files carry
+no copyright line, and the crate has no NOTICE file. Its C and assembly SIMD
+code is compiled into seqblaze's extension module at build time.
+
+constant_time_eq 0.4.2
+https://crates.io/crates/constant_time_eq/0.4.2
+
+Offered under CC0-1.0 OR MIT-0 OR Apache-2.0; used under the Apache License,
+Version 2.0 (text in LICENSE-APACHE). Author named by the crate: Cesar Eduardo
+Barros. The crate's licence files carry no copyright line, and the crate has
+no NOTICE file.
+
+arrayvec 0.7.8
+https://crates.io/crates/arrayvec/0.7.8
+
+Copyright (c) Ulrik Sverdrup "bluss" 2015-2023
+
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+cpufeatures 0.3.1 (x86 and x86_64 builds)
+https://crates.io/crates/cpufeatures/0.3.1
+
+Copyright (c) 2020-2026 The RustCrypto Project Developers
+
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+------------------------------------------------------------------------------
+
+CUDA backend (builds with the cuda feature)
+
+seqblaze builds made with its cuda feature use the Rust crate cudarc 0.19.10
+(https://crates.io/crates/cudarc/0.19.10; MIT OR Apache-2.0). cudarc loads the
+NVIDIA CUDA driver library dynamically at run time; no NVIDIA library is
+linked into or shipped with seqblaze. cudarc's pre-generated (bindgen) Rust
+bindings to the CUDA driver API are compiled into such builds and are
+distributed under cudarc's licence. The GPU code embedded in such builds (a
+CUDA fatbin) is compiled by nvcc from seqblaze's own CUDA sources. Builds
+without the cuda feature contain neither cudarc nor GPU code.

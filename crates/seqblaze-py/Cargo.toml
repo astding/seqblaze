@@ -1,0 +1,33 @@
+[package]
+name = "seqblaze-py"
+description = "Python bindings for seqblaze"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+name = "_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.29.3", features = ["abi3-py310"] }
+# merkle-blake3-v1 table identity (D128, result-provenance.md): default features
+# (C/assembly SIMD back ends built by `cc`), no `rayon`; the guarded workers
+# hash leaves in parallel. sha2 stays for merkle-sha256-v1 indices.
+blake3 = "=1.8.7"
+sha2 = { version = "=0.10.9", default-features = false }
+seqblaze-align = { path = "../seqblaze-align" }
+seqblaze-core = { path = "../seqblaze-core" }
+
+seqblaze-cuda = { path = "../seqblaze-cuda" }
+seqblaze-edit = { path = "../seqblaze-edit" }
+seqblaze-io = { path = "../seqblaze-io" }
+seqblaze-thermo = { path = "../seqblaze-thermo" }
+
+[features]
+default = []
+# CUDA backend (docs/wiki/gpu/cuda-backend.md); dev GPU builds use
+# `make -C <repo> build DEV_FEATURES=testing,cuda`. Not in release features.
+cuda = ["seqblaze-cuda/cuda"]

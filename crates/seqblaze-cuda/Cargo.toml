@@ -1,0 +1,24 @@
+[package]
+name = "seqblaze-cuda"
+description = "CUDA backend for seqblaze (milestone G1: device hamming); see docs/wiki/gpu/cuda-backend.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+build = "build.rs"
+
+# Without `cuda` this crate is a stub with no third-party dependency and no
+# build step: `device()` raises DeviceError ("built without CUDA").
+[dependencies]
+seqblaze-core = { path = "../seqblaze-core" }
+# `cuda-12080` pins the bindings, so cudarc never runs nvcc. `nvrtc` is compiled
+# in only for the `Ptx` type taken by `load_module`; no NVRTC function is called.
+cudarc = { version = "=0.19.10", default-features = false, features = ["std", "driver", "nvrtc", "dynamic-loading", "cuda-12080"], optional = true }
+
+[features]
+default = []
+cuda = ["dep:cudarc"]
+# Testing-only hooks (the device poison fill, align-cuda.md §13); enabled by
+# seqblaze-py's `testing` feature, never by a release build.
+testing = []

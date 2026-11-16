@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="654" viewBox="0 0 900 654" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">seqblaze speed relative to the fastest competitor</title>
+<desc id="d">Throughput ratios from one run per host type, 2026-11-12, log scale; rows marked with a dagger were re-measured on new hosts of the same types after a fix to the benchmark harness. Left: seqblaze on a 16-vCPU AMD EPYC 9655 at 1 and 16 threads against the fastest competitor configuration at the same thread count. Right: seqblaze CUDA on an NVIDIA RTX 6000 Ada against the fastest competitor on that host's 10 CPU threads. The same numbers are in the README table.</desc>
+<rect x="0.5" y="0.5" width="899" height="653" rx="10" fill="#ffffff" stroke="#d9d8d4"/>
+<text x="24.0" y="34.0" font-size="17" fill="#0b0b0b" text-anchor="start" font-weight="600">Throughput relative to the fastest competitor</text>
+<text x="24.0" y="54.0" font-size="12" fill="#52514e" text-anchor="start">Log scale; right of 1×, seqblaze is faster. Every row is the same task as the competitor's, with the same output.</text>
+<text x="340.0" y="84.0" font-size="13" fill="#0b0b0b" text-anchor="start" font-weight="600">CPU: AMD EPYC 9655, 16 vCPU</text>
+<text x="340.0" y="100.0" font-size="11" fill="#52514e" text-anchor="start">● 16 threads   ○ 1 thread</text>
+<rect x="340" y="106" width="21.7" height="454" fill="#fbe9e8"/>
+<line x1="361.7" y1="106" x2="361.7" y2="560" stroke="#8c8b86" stroke-width="1.5"/>
+<text x="361.7" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">1×</text>
+<line x1="433.9" y1="106" x2="433.9" y2="560" stroke="#e6e5e1" stroke-width="1"/>
+<text x="433.9" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">10×</text>
+<line x1="506.1" y1="106" x2="506.1" y2="560" stroke="#e6e5e1" stroke-width="1"/>
+<text x="506.1" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">100×</text>
+<line x1="578.3" y1="106" x2="578.3" y2="560" stroke="#e6e5e1" stroke-width="1"/>
+<text x="578.3" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">1,000×</text>
+<text x="636.0" y="84.0" font-size="13" fill="#0b0b0b" text-anchor="start" font-weight="600">GPU: NVIDIA RTX 6000 Ada</text>
+<text x="636.0" y="100.0" font-size="11" fill="#52514e" text-anchor="start">◆ CUDA vs competitor on 10 CPU threads</text>
+<rect x="636" y="106" width="20.7" height="454" fill="#fbe9e8"/>
+<line x1="656.7" y1="106" x2="656.7" y2="560" stroke="#8c8b86" stroke-width="1.5"/>
+<text x="656.7" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">1×</text>
+<line x1="725.6" y1="106" x2="725.6" y2="560" stroke="#e6e5e1" stroke-width="1"/>
+<text x="725.6" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">10×</text>
+<line x1="794.4" y1="106" x2="794.4" y2="560" stroke="#e6e5e1" stroke-width="1"/>
+<text x="794.4" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">100×</text>
+<line x1="863.3" y1="106" x2="863.3" y2="560" stroke="#e6e5e1" stroke-width="1"/>
+<text x="863.3" y="576.0" font-size="11" fill="#7a7974" text-anchor="middle">1,000×</text>
+<text x="357.7" y="592.0" font-size="10" fill="#e34948" text-anchor="end">competitor faster</text>
+<text x="24.0" y="116.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="600">Thermodynamics</text>
+<text x="318.0" y="138.0" font-size="12" fill="#0b0b0b" text-anchor="end">Tm, 20 nt  vs primer3-py</text>
+<line x1="467.1" y1="134" x2="449.6" y2="134" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="467.1" cy="134.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="449.6" cy="134.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="476.1" y="138.0" font-size="11" fill="#52514e" text-anchor="start">16×</text>
+<path d="M760.7 128 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="769.7" y="138.0" font-size="11" fill="#52514e" text-anchor="start">32×</text>
+<text x="318.0" y="160.0" font-size="12" fill="#0b0b0b" text-anchor="end">Tm, 20 nt  vs Biopython</text>
+<line x1="546.7" y1="156" x2="510.2" y2="156" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="546.7" cy="156.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="510.2" cy="156.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="555.7" y="160.0" font-size="11" fill="#52514e" text-anchor="start">114×</text>
+<path d="M828.4 150 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="837.4" y="160.0" font-size="11" fill="#52514e" text-anchor="start">311×</text>
+<text x="318.0" y="182.0" font-size="12" fill="#0b0b0b" text-anchor="end">hairpin, 30 nt  vs primer3-py</text>
+<line x1="368.7" y1="178" x2="370.0" y2="178" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="368.7" cy="178.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="370.0" cy="178.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="379.0" y="182.0" font-size="11" fill="#52514e" text-anchor="start">1.3×</text>
+<path d="M716.3 172 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="725.3" y="182.0" font-size="11" fill="#52514e" text-anchor="start">7.3×</text>
+<text x="318.0" y="204.0" font-size="12" fill="#0b0b0b" text-anchor="end">dimer, 30 nt  vs primer3-py</text>
+<line x1="381.7" y1="200" x2="383.8" y2="200" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="381.7" cy="200.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="383.8" cy="200.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="392.8" y="204.0" font-size="11" fill="#52514e" text-anchor="start">2.0×</text>
+<path d="M732.5 194 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="741.5" y="204.0" font-size="11" fill="#52514e" text-anchor="start">13×</text>
+<text x="24.0" y="240.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="600">Alignment</text>
+<text x="318.0" y="262.0" font-size="12" fill="#0b0b0b" text-anchor="end">needle, 1,000 nt  vs EMBOSS</text>
+<line x1="481.3" y1="258" x2="493.7" y2="258" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="481.3" cy="258.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="493.7" cy="258.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="502.7" y="262.0" font-size="11" fill="#52514e" text-anchor="start">67×</text>
+<path d="M872.0 252 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="863.0" y="262.0" font-size="11" fill="#52514e" text-anchor="end">1,341×</text>
+<text x="318.0" y="284.0" font-size="12" fill="#0b0b0b" text-anchor="end">water, 1,000 nt  vs EMBOSS</text>
+<line x1="504.7" y1="280" x2="532.3" y2="280" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="504.7" cy="280.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="532.3" cy="280.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="541.3" y="284.0" font-size="11" fill="#52514e" text-anchor="start">230×</text>
+<path d="M873.7 274 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="864.7" y="284.0" font-size="11" fill="#52514e" text-anchor="end">1,416×</text>
+<text x="318.0" y="306.0" font-size="12" fill="#0b0b0b" text-anchor="end">global, 100 nt  vs Biopython</text>
+<line x1="413.7" y1="302" x2="449.1" y2="302" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="413.7" cy="302.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="449.1" cy="302.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="458.1" y="306.0" font-size="11" fill="#52514e" text-anchor="start">16×</text>
+<path d="M761.3 296 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="770.3" y="306.0" font-size="11" fill="#52514e" text-anchor="start">33×</text>
+<text x="318.0" y="328.0" font-size="12" fill="#0b0b0b" text-anchor="end">global, 1,000 nt  vs parasail</text>
+<line x1="375.3" y1="324" x2="366.1" y2="324" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="375.3" cy="324.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="366.1" cy="324.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="384.3" y="328.0" font-size="11" fill="#52514e" text-anchor="start">1.1×</text>
+<path d="M746.8 318 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="755.8" y="328.0" font-size="11" fill="#52514e" text-anchor="start">20×</text>
+<text x="318.0" y="350.0" font-size="12" fill="#0b0b0b" text-anchor="end">local, 1,000 nt  vs parasail</text>
+<line x1="393.9" y1="346" x2="381.2" y2="346" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="393.9" cy="346.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="381.2" cy="346.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="402.9" y="350.0" font-size="11" fill="#52514e" text-anchor="start">1.9×</text>
+<path d="M750.3 340 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="759.3" y="350.0" font-size="11" fill="#52514e" text-anchor="start">23×</text>
+<text x="24.0" y="386.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="600">Edit distance</text>
+<text x="318.0" y="408.0" font-size="12" fill="#0b0b0b" text-anchor="end">Levenshtein, 100 nt †  vs RapidFuzz</text>
+<line x1="375.7" y1="404" x2="385.4" y2="404" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="375.7" cy="404.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="385.4" cy="404.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="394.4" y="408.0" font-size="11" fill="#52514e" text-anchor="start">2.1×</text>
+<path d="M680.3 398 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="689.3" y="408.0" font-size="11" fill="#52514e" text-anchor="start">2.2×</text>
+<text x="318.0" y="430.0" font-size="12" fill="#0b0b0b" text-anchor="end">Levenshtein, 1,000 nt  vs edlib</text>
+<line x1="347.0" y1="426" x2="358.3" y2="426" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="347.0" cy="426.0" r="4" fill="#ffffff" stroke="#e34948" stroke-width="2"/>
+<circle cx="358.3" cy="426.0" r="5" fill="#e34948" stroke="#e34948" stroke-width="2"/>
+<text x="367.3" y="430.0" font-size="11" fill="#52514e" text-anchor="start">0.90×</text>
+<path d="M711.6 420 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="720.6" y="430.0" font-size="11" fill="#52514e" text-anchor="start">6.3×</text>
+<text x="318.0" y="452.0" font-size="12" fill="#0b0b0b" text-anchor="end">infix, 30 in 200 nt  vs edlib</text>
+<line x1="444.3" y1="448" x2="449.5" y2="448" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="444.3" cy="448.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="449.5" cy="448.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="458.5" y="452.0" font-size="11" fill="#52514e" text-anchor="start">16×</text>
+<path d="M739.7 442 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="748.7" y="452.0" font-size="11" fill="#52514e" text-anchor="start">16×</text>
+<text x="318.0" y="474.0" font-size="12" fill="#0b0b0b" text-anchor="end">Levenshtein A×B, 30 nt  vs RapidFuzz</text>
+<line x1="401.9" y1="470" x2="368.5" y2="470" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="401.9" cy="470.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="368.5" cy="470.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="410.9" y="474.0" font-size="11" fill="#52514e" text-anchor="start">1.2×</text>
+<path d="M654.9 464 l6 6 l-6 6 l-6 -6 z" fill="#e34948"/>
+<text x="663.9" y="474.0" font-size="11" fill="#52514e" text-anchor="start">0.94×</text>
+<text x="318.0" y="496.0" font-size="12" fill="#0b0b0b" text-anchor="end">Levenshtein A×B, 1,000 nt  vs RapidFuzz</text>
+<line x1="352.2" y1="492" x2="364.7" y2="492" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="352.2" cy="492.0" r="4" fill="#ffffff" stroke="#e34948" stroke-width="2"/>
+<circle cx="364.7" cy="492.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="373.7" y="496.0" font-size="11" fill="#52514e" text-anchor="start">1.1×</text>
+<path d="M785.7 486 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="794.7" y="496.0" font-size="11" fill="#52514e" text-anchor="start">75×</text>
+<text x="318.0" y="518.0" font-size="12" fill="#0b0b0b" text-anchor="end">Hamming, 100 nt †  vs RapidFuzz</text>
+<line x1="358.8" y1="514" x2="397.2" y2="514" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="358.8" cy="514.0" r="4" fill="#ffffff" stroke="#e34948" stroke-width="2"/>
+<circle cx="397.2" cy="514.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="406.2" y="518.0" font-size="11" fill="#52514e" text-anchor="start">3.1×</text>
+<path d="M673.3 508 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="682.3" y="518.0" font-size="11" fill="#52514e" text-anchor="start">1.7×</text>
+<text x="318.0" y="540.0" font-size="12" fill="#0b0b0b" text-anchor="end">Hamming A×B, 30 nt  vs RapidFuzz</text>
+<line x1="404.2" y1="536" x2="366.1" y2="536" stroke="#8c8b86" stroke-width="2"/>
+<circle cx="404.2" cy="536.0" r="4" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<circle cx="366.1" cy="536.0" r="5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"/>
+<text x="413.2" y="540.0" font-size="11" fill="#52514e" text-anchor="start">1.1×</text>
+<path d="M656.7 530 l6 6 l-6 6 l-6 -6 z" fill="#2a78d6"/>
+<text x="665.7" y="540.0" font-size="11" fill="#52514e" text-anchor="start">1.0×</text>
+<text x="24.0" y="610.0" font-size="10.5" fill="#7a7974" text-anchor="start">One run per host type on rented hosts, 2026-11-12; rows marked † were re-measured on new hosts of the same types after a harness fix.</text>
+<text x="24.0" y="624.0" font-size="10.5" fill="#7a7974" text-anchor="start">Each competitor in its fastest configuration on the same cores: its own threads, or a thread pool, a process pool or parallel runs.</text>
+<text x="24.0" y="638.0" font-size="10.5" fill="#7a7974" text-anchor="start">The whole call is timed, from Python input to NumPy output; outputs were checked equal on each case's first 300–2,000 items.</text>
+</svg>
